@@ -1,6 +1,6 @@
 # signin
 
-A new Flutter project.
+Today, Tomorrow is a FLutter project i created for my Mobile Application 2 class.
 
 ## Getting Started
 
@@ -14,3 +14,12 @@ A few resources to get you started if this is your first Flutter project:
 For help getting started with Flutter, view our 
 [online documentation](https://flutter.io/docs), which offers tutorials, 
 samples, guidance on mobile development, and a full API reference.
+
+
+## Resources
+s
+https://flutter.dev/docs/get-started/install
+https://codelabs.developers.google.com/codelabs/flutter-firebase/#0
+https://material.io/collections/developer-tutorials/#flutter
+https://flutterawesome.com/tag/templates/
+https://pub.dartlang.org/documentation/curved_navigation_bar/latest/
