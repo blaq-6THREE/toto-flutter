@@ -23,3 +23,7 @@ https://codelabs.developers.google.com/codelabs/flutter-firebase/#0
 https://material.io/collections/developer-tutorials/#flutter
 https://flutterawesome.com/tag/templates/
 https://pub.dartlang.org/documentation/curved_navigation_bar/latest/
+
+## TO be used resources
+https://www.youtube.com/watch?v=RJEnTRBxaSg
+https://medium.com/flutter-community/breaking-layouts-in-rows-and-columns-in-flutter-8ea1ce4c1316
