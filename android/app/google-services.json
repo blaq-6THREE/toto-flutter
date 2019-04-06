@@ -1,0 +1,35 @@
+{
+  "project_info": {
+    "project_number": "164001329466",
+    "firebase_url": "https://example-signin-6d17f.firebaseio.com",
+    "project_id": "example-signin-6d17f",
+    "storage_bucket": "example-signin-6d17f.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:164001329466:android:467e072a913f04a7",
+        "android_client_info": {
+          "package_name": "com.example.signin"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCwOBmp729MVghTHLmmYSanoTRzN-h4zaA"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "164001329466-ir7tfgtl7i4it2sk3u4jocq28a4su9ha.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
