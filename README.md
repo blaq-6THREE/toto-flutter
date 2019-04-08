@@ -27,3 +27,12 @@ https://pub.dartlang.org/documentation/curved_navigation_bar/latest/
 ## TO be used resources
 https://www.youtube.com/watch?v=RJEnTRBxaSg
 https://medium.com/flutter-community/breaking-layouts-in-rows-and-columns-in-flutter-8ea1ce4c1316
+
+## Page redirection
+https://www.youtube.com/watch?v=Pl1rKBnmDkU
+https://medium.com/flutterpub/flutter-how-to-do-user-login-with-firebase-a6af760b14d5
+https://medium.com/@tattwei46/flutter-how-to-do-crud-with-firebase-rtdb-ce61e3ce53a
+
+## Themes
+https://startflutter.com/
+https://www.youtube.com/watch?v=GlttcCsf8TU
