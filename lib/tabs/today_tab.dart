@@ -26,7 +26,8 @@ class TodayScreen extends StatelessWidget {
   }
 
   Future<String> _alertDialogue(BuildContext context) async {
-    String teamName = '';
+    bool isChecked;
+
     return showDialog<String>(
       context: context,
       barrierDismissible:
@@ -44,16 +45,29 @@ class TodayScreen extends StatelessWidget {
               TextField(
                 keyboardType: TextInputType.text,
                 decoration: InputDecoration(
-                    labelText: "Descripton",
-                    hintText: "taco lupita looks lit right now"),
+                  labelText: "Descripton",
+                  hintText: "taco lupita looks lit right now"),
               ),
               Divider(color: Colors.red),
-              Row(
+              Container(
                 // TODO: checkbox, Text() and Textfield, location image
+                child: Row(
+                  children: <Widget>[
+                    Text("data"),
+                    Text("Location"),
+                    Text("data")
+                  ],
+                ),
               ),
-              Row(
-                // TODO: checkbox, Text() and Textfield, alarm image
-              )
+              Container(
+                  // TODO: checkbox, Text() and Textfield, alarm image
+                  child: Row(
+                children: <Widget>[
+                  Text("data"),
+                  Text("Location"),
+                  Text("data")
+                ],
+              ))
             ],
           ),
           backgroundColor: Color.fromRGBO(93, 92, 92, 1),
