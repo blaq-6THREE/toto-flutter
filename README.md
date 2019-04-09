@@ -17,10 +17,11 @@ samples, guidance on mobile development, and a full API reference.
 
 
 ## Resources
-s
+
 https://flutter.dev/docs/get-started/install
 https://codelabs.developers.google.com/codelabs/flutter-firebase/#0
 https://material.io/collections/developer-tutorials/#flutter
+
 https://flutterawesome.com/tag/templates/
 https://pub.dartlang.org/documentation/curved_navigation_bar/latest/
 
@@ -36,3 +37,8 @@ https://medium.com/@tattwei46/flutter-how-to-do-crud-with-firebase-rtdb-ce61e3ce
 ## Themes
 https://startflutter.com/
 https://www.youtube.com/watch?v=GlttcCsf8TU
+
+## Address & Date/Time
+https://pub.dartlang.org/packages/flutter_google_places
+
+https://pub.dartlang.org/packages/datetime_picker_formfield#-readme-tab-

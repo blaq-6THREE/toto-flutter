@@ -2,8 +2,30 @@
 
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
+import 'package:flutter_google_places/flutter_google_places.dart';
+import 'package:datetime_picker_formfield/datetime_picker_formfield.dart';
+import 'package:intl/intl.dart';
 
-class TodayScreen extends StatelessWidget {
+class TodayScreen extends StatefulWidget {
+  @override
+  _TodayScreenState createState() => _TodayScreenState();
+}
+
+class _TodayScreenState extends State<TodayScreen> {
+
+  String apiKey = "AIzaSyBrii-n_FsOb96YDr-xb2ZLqiPUIhKv0Fc";
+
+  final formats = {
+    InputType.both: DateFormat("EEEE, MMMM d, yyyy 'at' h:mma"),
+    InputType.date: DateFormat('EEE, M/d/y'),
+    InputType.time: DateFormat("HH:mm"),
+  };
+
+  // Changeable in demo
+  InputType inputType = InputType.time;
+  bool editable = true;
+  DateTime date;
+
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -12,22 +34,20 @@ class TodayScreen extends StatelessWidget {
         body: Center(
           child: Image.asset(
             'assets/images/no_list.png',
-            scale: 3,
+            scale: 4,
           ),
         ),
         floatingActionButton: FloatingActionButton(
           child: Icon(Icons.add),
           onPressed: () {
-            _alertDialogue(context);
+            _alertDialogue();
           },
         ),
       ),
     );
   }
 
-  Future<String> _alertDialogue(BuildContext context) async {
-    bool isChecked;
-
+  Future<String> _alertDialogue() async {
     return showDialog<String>(
       context: context,
       barrierDismissible:
@@ -35,42 +55,43 @@ class TodayScreen extends StatelessWidget {
       builder: (BuildContext context) {
         return AlertDialog(
           title: Text('Todo Item for morrow'),
-          content: Column(
-            children: <Widget>[
-              TextField(
-                keyboardType: TextInputType.text,
-                decoration: InputDecoration(
-                    labelText: "Title", hintText: "buy creator lunch"),
-              ),
-              TextField(
-                keyboardType: TextInputType.text,
-                decoration: InputDecoration(
-                  labelText: "Descripton",
-                  hintText: "taco lupita looks lit right now"),
-              ),
-              Divider(color: Colors.red),
-              Container(
-                // TODO: checkbox, Text() and Textfield, location image
-                child: Row(
-                  children: <Widget>[
-                    Text("data"),
-                    Text("Location"),
-                    Text("data")
-                  ],
+          content: SingleChildScrollView(
+            child: Column(
+              children: <Widget>[
+                TextField(
+                  keyboardType: TextInputType.text,
+                  decoration: InputDecoration(
+                    labelText: "Title",
+                    icon: Icon(Icons.title)),
                 ),
-              ),
-              Container(
-                  // TODO: checkbox, Text() and Textfield, alarm image
-                  child: Row(
-                children: <Widget>[
-                  Text("data"),
-                  Text("Location"),
-                  Text("data")
-                ],
-              ))
-            ],
+                TextField(
+                  keyboardType: TextInputType.text,
+                  decoration: InputDecoration(
+                    labelText: "description",
+                    icon: Icon(Icons.description)),
+                ),
+                Divider(color: Colors.red),
+                PlacesAutocompleteField(
+                  apiKey: apiKey,
+                  hint: "location",
+                  language: "us",
+                  inputDecoration: InputDecoration(
+                    icon: Icon(Icons.location_on)
+                  ),
+                ),
+                DateTimePickerFormField(
+                  format: formats[inputType],
+                  inputType: inputType,
+                  editable: true,
+                  decoration: InputDecoration(
+                    labelText: "alarm",
+                    icon: Icon(Icons.alarm)
+                  ),
+                )
+              ],
+            ),
           ),
-          backgroundColor: Color.fromRGBO(93, 92, 92, 1),
+          backgroundColor: Colors.white,
           actions: <Widget>[
             RaisedButton(
               child: Text('Ok'),
@@ -78,13 +99,13 @@ class TodayScreen extends StatelessWidget {
               textColor: Colors.white,
               onPressed: () {
                 Fluttertoast.showToast(
-                    msg: "This is Center Short Toast",
-                    toastLength: Toast.LENGTH_SHORT,
-                    gravity: ToastGravity.BOTTOM,
-                    timeInSecForIos: 1,
-                    backgroundColor: Colors.red,
-                    textColor: Colors.white,
-                    fontSize: 16.0);
+                  msg: "This is Center Short Toast",
+                  toastLength: Toast.LENGTH_SHORT,
+                  gravity: ToastGravity.BOTTOM,
+                  timeInSecForIos: 1,
+                  backgroundColor: Colors.red,
+                  textColor: Colors.white,
+                  fontSize: 16.0);
               },
             ),
             RaisedButton(

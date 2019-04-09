@@ -36,6 +36,12 @@ dependencies:
   # The folowwing addsToasts to the app
   fluttertoast: ^3.0.3
 
+  # This is for address autocomplete
+  flutter_google_places: ^0.2.1
+
+  # This is for the Date & Time picker
+  datetime_picker_formfield: ^0.1.8
+
 dev_dependencies:
   flutter_test:
     sdk: flutter
