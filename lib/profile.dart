@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
-import 'pages/Setup/signin.dart';
-
-import 'pages/Setup/SignUp.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:signin/pages/Setup/signin.dart';
 
 class ProfilePage extends StatefulWidget {
 
@@ -13,44 +11,61 @@ class ProfilePage extends StatefulWidget {
   _ProfilePageState createState() => _ProfilePageState();
 }
 
+enum AuthStatus {
+  notSignIn,
+  signedIn
+}
+
 class _ProfilePageState extends State<ProfilePage> {
+
+  AuthStatus status = AuthStatus.notSignIn;
+  String uid;
+
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+
+    currentUser().then((userID) {
+      setState(() {
+        //status = userID
+        if (userID == null) {
+          status = AuthStatus.notSignIn;
+          uid = userID;
+        }
+        else {
+          status = AuthStatus.signedIn;
+        }
+      });
+    });
+  }
+
+  void signedIn() {
+    setState(() {
+      status = AuthStatus.signedIn;
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: Text("Profile"),
-      ),
-      body: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        crossAxisAlignment: CrossAxisAlignment.stretch,
-        children: <Widget>[
-          RaisedButton(
-            onPressed: () {
-              navigateToSignIn();
-            },
-            child: Text("Sign in"),
+    switch (status) {
+      case AuthStatus.notSignIn:
+        // Take em to a page with two buttons
+        return LoginPage(onSignedIn: signedIn);
+        break;
+      case AuthStatus.signedIn:
+        // Take em to a full profile page
+        return Scaffold(
+          appBar: AppBar(
+            title: Text("Signed in as $uid"),
           ),
-          RaisedButton(
-            onPressed: () {
-              navigateToSignUp();
-            },
-            child: Text("Register"),
-          )
-        ],
-      ),
-    );
+        );
+        break;
+    }
   }
 
-  void navigateToSignIn()
-  {
-    Navigator.push(context, MaterialPageRoute(builder: (context) => LoginPage
-      (), fullscreenDialog: true));
-  }
-
-  void navigateToSignUp()
-  {
-    Navigator.push(context, MaterialPageRoute(builder: (context) => SignUp
-      (), fullscreenDialog: true));
+  Future<String> currentUser() async{
+    FirebaseUser user = await FirebaseAuth.instance.currentUser();
+    return user.uid;
   }
 }

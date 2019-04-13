@@ -62,13 +62,15 @@ class _TodayScreenState extends State<TodayScreen> {
                   keyboardType: TextInputType.text,
                   decoration: InputDecoration(
                     labelText: "Title",
-                    icon: Icon(Icons.title)),
+                    icon: Icon(Icons.title)
+                  ),
                 ),
                 TextField(
                   keyboardType: TextInputType.text,
                   decoration: InputDecoration(
                     labelText: "description",
-                    icon: Icon(Icons.description)),
+                    icon: Icon(Icons.description)
+                  ),
                 ),
                 Divider(color: Colors.red),
                 PlacesAutocompleteField(
@@ -112,7 +114,9 @@ class _TodayScreenState extends State<TodayScreen> {
               child: Text("Cancel"),
               textColor: Colors.white,
               color: Colors.red,
-              onPressed: () {},
+              onPressed: () {
+                
+              },
             )
           ],
         );

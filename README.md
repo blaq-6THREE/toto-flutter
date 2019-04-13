@@ -42,3 +42,11 @@ https://www.youtube.com/watch?v=GlttcCsf8TU
 https://pub.dartlang.org/packages/flutter_google_places
 
 https://pub.dartlang.org/packages/datetime_picker_formfield#-readme-tab-
+
+_____________________________________________________________
+# To be used
+https://docs.flutter.io/flutter/material/SliverAppBar-class.html
+
+https://www.youtube.com/watch?v=dxNBRm_gwno
+
+https://www.youtube.com/watch?v=efbB8-x9T2c

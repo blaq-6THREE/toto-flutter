@@ -4,6 +4,10 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:signin/pages/home.dart';
 
 class LoginPage extends StatefulWidget {
+  
+  LoginPage({this.onSignedIn});
+  final VoidCallback onSignedIn;
+  
   @override
   _LoginPageState createState() => _LoginPageState();
 }
@@ -66,6 +70,8 @@ class _LoginPageState extends State<LoginPage> {
           FirebaseUser user = await FirebaseAuth.instance.signInWithEmailAndPassword(email: _email, password: _password);
           Navigator.push(context, MaterialPageRoute(builder: (context) =>
               Home(user: user)));
+
+          widget.onSignedIn();
         }
         catch (e) {
           print(e.message);

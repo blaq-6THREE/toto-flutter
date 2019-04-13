@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'tab_widget.dart';
 import 'profile.dart';
 import 'package:curved_navigation_bar/curved_navigation_bar.dart';
-import 'package:firebase_auth/firebase_auth.dart';
 
 class Home extends StatefulWidget {
   @override
