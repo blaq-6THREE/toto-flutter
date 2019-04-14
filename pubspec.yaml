@@ -28,12 +28,12 @@ dependencies:
   firebase_auth: ^0.8.3
 
   # Firebase Databse
-  firebase_database: ^2.0.2
+  firebase_database: ^2.0.3
 
   # This is for the curved navigation bar
   curved_navigation_bar: ^0.1.2
   
-  # The folowwing addsToasts to the app
+  # The following adds Toasts to the app
   fluttertoast: ^3.0.3
 
   # This is for address autocomplete

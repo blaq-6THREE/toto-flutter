@@ -6,12 +6,18 @@ import 'package:flutter_google_places/flutter_google_places.dart';
 import 'package:datetime_picker_formfield/datetime_picker_formfield.dart';
 import 'package:intl/intl.dart';
 
+import 'package:firebase_database/firebase_database.dart';
+
 class TodayScreen extends StatefulWidget {
   @override
   _TodayScreenState createState() => _TodayScreenState();
 }
 
 class _TodayScreenState extends State<TodayScreen> {
+
+  FirebaseDatabase database = new FirebaseDatabase();
+  database.setPersistenceEnabled(true);
+  database.setPersistenceCacheSizeBytes(10000000);
 
   String apiKey = "AIzaSyBrii-n_FsOb96YDr-xb2ZLqiPUIhKv0Fc";
 
@@ -123,4 +129,7 @@ class _TodayScreenState extends State<TodayScreen> {
       },
     );
   }
+
+  // Todo: Write to database
+
 }

@@ -28,13 +28,13 @@ class _ProfilePageState extends State<ProfilePage> {
 
     currentUser().then((userID) {
       setState(() {
-        //status = userID
         if (userID == null) {
           status = AuthStatus.notSignIn;
           uid = userID;
         }
         else {
           status = AuthStatus.signedIn;
+          uid = userID;
         }
       });
     });
@@ -57,7 +57,7 @@ class _ProfilePageState extends State<ProfilePage> {
         // Take em to a full profile page
         return Scaffold(
           appBar: AppBar(
-            title: Text("Signed in as $uid"),
+            title: Text(uid),
           ),
         );
         break;
