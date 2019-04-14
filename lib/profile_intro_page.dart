@@ -5,7 +5,7 @@ import 'package:signin/pages/Setup/signin.dart';
 class ProfileIntro extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    // TODO: implement build
+
     return Scaffold(
       appBar: AppBar(
         title: Text("Welcome"),
@@ -46,3 +46,5 @@ class ProfileIntro extends StatelessWidget {
     );
   }
 }
+
+// This PAGE is all set!
