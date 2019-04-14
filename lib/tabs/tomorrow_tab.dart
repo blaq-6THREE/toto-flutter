@@ -7,7 +7,7 @@ class TomorrowScreen extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       home: Scaffold(
         body: Center(
-          child: Image.asset('assets/images/no_list.png', scale: 3,),
+          child: Image.asset('assets/images/no_list.png', scale: 4,),
         ),
       ),
     );

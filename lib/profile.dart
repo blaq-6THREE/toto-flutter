@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:signin/pages/Setup/signin.dart';
+import 'profile_intro_page.dart';
+
 
 class ProfilePage extends StatefulWidget {
 
@@ -51,7 +53,8 @@ class _ProfilePageState extends State<ProfilePage> {
     switch (status) {
       case AuthStatus.notSignIn:
         // Take em to a page with two buttons
-        return LoginPage(onSignedIn: signedIn);
+        // return LoginPage(onSignedIn: signedIn);
+        return ProfileIntro();
         break;
       case AuthStatus.signedIn:
         // Take em to a full profile page

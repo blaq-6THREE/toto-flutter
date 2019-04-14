@@ -8,7 +8,7 @@ class User {
 
   toJson(){
     return {
-
+      
     };
   }
 }

@@ -5,6 +5,8 @@ import 'package:fluttertoast/fluttertoast.dart';
 import 'package:flutter_google_places/flutter_google_places.dart';
 import 'package:datetime_picker_formfield/datetime_picker_formfield.dart';
 import 'package:intl/intl.dart';
+import 'package:signin/user.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 
 import 'package:firebase_database/firebase_database.dart';
 
@@ -15,9 +17,7 @@ class TodayScreen extends StatefulWidget {
 
 class _TodayScreenState extends State<TodayScreen> {
 
-  FirebaseDatabase database = new FirebaseDatabase();
-  database.setPersistenceEnabled(true);
-  database.setPersistenceCacheSizeBytes(10000000);
+  final mainReference = FirebaseDatabase.instance.reference();
 
   String apiKey = "AIzaSyBrii-n_FsOb96YDr-xb2ZLqiPUIhKv0Fc";
 
@@ -106,14 +106,8 @@ class _TodayScreenState extends State<TodayScreen> {
               color: Colors.blue,
               textColor: Colors.white,
               onPressed: () {
-                Fluttertoast.showToast(
-                  msg: "This is Center Short Toast",
-                  toastLength: Toast.LENGTH_SHORT,
-                  gravity: ToastGravity.BOTTOM,
-                  timeInSecForIos: 1,
-                  backgroundColor: Colors.red,
-                  textColor: Colors.white,
-                  fontSize: 16.0);
+                // Todo: Add to Database
+                addToDatabase();
               },
             ),
             RaisedButton(
@@ -131,5 +125,7 @@ class _TodayScreenState extends State<TodayScreen> {
   }
 
   // Todo: Write to database
-
+  void addToDatabase() {
+    
+  }
 }
