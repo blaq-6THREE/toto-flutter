@@ -33,7 +33,7 @@ class ProfileIntro extends StatelessWidget {
               color: Colors.red[800],
             ),
             RaisedButton(
-              child: Text("Create User"),
+              child: Text("Register"),
               color: Colors.blue,
               onPressed: () {
                 Navigator.push(context,
