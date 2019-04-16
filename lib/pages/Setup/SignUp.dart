@@ -29,11 +29,20 @@ class _SignUpState extends State<SignUp> {
                 TextFormField(
                   validator: (input) {
                     if (input.isEmpty) {
+                      return "Please provide your name";
+                    }
+                  },
+                  onSaved: (input) => _email = input,
+                  decoration: InputDecoration(labelText: "name"),
+                ),
+                TextFormField(
+                  validator: (input) {
+                    if (input.isEmpty) {
                       return "Please provide a proper email";
                     }
                   },
                   onSaved: (input) => _email = input,
-                  decoration: InputDecoration(labelText: "Email"),
+                  decoration: InputDecoration(labelText: "email"),
                 ),
                 TextFormField(
                   validator: (input) {
@@ -42,7 +51,17 @@ class _SignUpState extends State<SignUp> {
                     }
                   },
                   onSaved: (input) => _password = input,
-                  decoration: InputDecoration(labelText: "Password"),
+                  decoration: InputDecoration(labelText: "password"),
+                  obscureText: true,
+                ),
+                TextFormField(
+                  validator: (input) {
+                    if (input.length < 6) {
+                      return "Please provide a password";
+                    }
+                  },
+                  onSaved: (input) => _password = input,
+                  decoration: InputDecoration(labelText: "retype password"),
                   obscureText: true,
                 ),
                 RaisedButton(onPressed: () {

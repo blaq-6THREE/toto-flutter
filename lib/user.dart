@@ -1,14 +1,21 @@
+import 'package:firebase_database/firebase_database.dart';
 
-class User {
-  String _id;
-  String _name;
-  String _email;
+class TodoList {
+  String key;
+  String name;
+  String email;
 
-  User (this._id, this._name, this._email);
+  TodoList(this.name, this.email,);
 
-  toJson(){
+  TodoList.fromSnapshot(DataSnapshot snapshot)
+      : key = snapshot.key,
+        name = snapshot.value["name"],
+        email = snapshot.value["email"];
+
+  toJson() {
     return {
-      
+      "name": name,
+      "email": email,
     };
   }
 }

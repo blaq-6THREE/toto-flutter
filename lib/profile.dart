@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:signin/pages/Setup/signin.dart';
 import 'profile_intro_page.dart';
-
 
 class ProfilePage extends StatefulWidget {
 
@@ -25,7 +23,7 @@ class _ProfilePageState extends State<ProfilePage> {
 
   @override
   void initState() {
-    // TODO: implement initState
+
     super.initState();
 
     currentUser().then((userID) {

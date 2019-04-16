@@ -25,9 +25,10 @@ class _LoginPageState extends State<LoginPage> {
     return Scaffold(
         appBar: AppBar(
           title: Text('Sign In'),
+          backgroundColor: Colors.green,
         ),
         body: new Container(
-          padding: new EdgeInsets.all(20.0),
+          padding: new EdgeInsets.only(left:20.0, right: 20, top: 80),
           child: Form (
             key: _formKey,
             child: Column(
@@ -38,7 +39,9 @@ class _LoginPageState extends State<LoginPage> {
                       return "Please provide a proper email";
                     }
                   },
-                  onSaved: (input) => _email = input,
+                  onSaved: (input) {
+                    _email = input;
+                  },
                   decoration: InputDecoration(labelText: "Email"),
                 ),
                 TextFormField(
@@ -47,7 +50,10 @@ class _LoginPageState extends State<LoginPage> {
                       return "Please provide a password";
                     }
                   },
-                  onSaved: (input) => _password = input,
+                  onSaved: (input) 
+                  {
+                    _password = input;
+                  },
                   decoration: InputDecoration(labelText: "Password"),
                   obscureText: true,
                 ),
