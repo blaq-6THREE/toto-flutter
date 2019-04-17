@@ -15,14 +15,13 @@ class _SignUpState extends State<SignUp> {
 
   @override
   Widget build(BuildContext context) {
-
     return Scaffold(
         appBar: AppBar(
           title: Text('Register'),
         ),
         body: new Container(
           padding: new EdgeInsets.all(20.0),
-          child: Form (
+          child: Form(
             key: _formKey,
             child: Column(
               children: <Widget>[
@@ -64,31 +63,28 @@ class _SignUpState extends State<SignUp> {
                   decoration: InputDecoration(labelText: "retype password"),
                   obscureText: true,
                 ),
-                RaisedButton(onPressed: () {
-                  signUp();
-                },
+                RaisedButton(
+                  onPressed: () {
+                    signUp();
+                  },
                   child: Text("Register"),
                 )
               ],
             ),
           ),
-        ));
+        )
+    );
   }
 
-  void signUp() async
-  {
-    if (_formKey.currentState.validate())
-      {
-        _formKey.currentState.save();
-        try {
-          FirebaseUser user =  await FirebaseAuth.instance
-              .createUserWithEmailAndPassword
-            (email: _email, password: _password);
-          Navigator.pushReplacement(context, MaterialPageRoute(builder:
-              (_) => Home(user: user)));
-        } catch (e) {
-
-        }
-      }
+  void signUp() async {
+    if (_formKey.currentState.validate()) {
+      _formKey.currentState.save();
+      try {
+        FirebaseUser user = await FirebaseAuth.instance
+            .createUserWithEmailAndPassword(email: _email, password: _password);
+        Navigator.pushReplacement(
+            context, MaterialPageRoute(builder: (_) => Home(user: user)));
+      } catch (e) {}
+    }
   }
 }

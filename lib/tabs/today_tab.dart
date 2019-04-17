@@ -11,7 +11,6 @@ class TodayScreen extends StatefulWidget {
 class _TodayScreenState extends State<TodayScreen> {
 
   List<TodoList> listsTodoList = List();
-  TodoList todoList;
   DatabaseReference userRef;
 
   final GlobalKey<FormState> formKey = GlobalKey<FormState>();
@@ -19,7 +18,6 @@ class _TodayScreenState extends State<TodayScreen> {
   @override
   void initState() {
     super.initState();
-    todoList = TodoList("", "", "", "");
     final FirebaseDatabase database = FirebaseDatabase.instance; //Rather then just writing FirebaseDatabase(), get the instance.
     userRef = database.reference().child('user');
     userRef.onChildAdded.listen(_onEntryAdded);
@@ -47,25 +45,49 @@ class _TodayScreenState extends State<TodayScreen> {
     return Scaffold(
       body: Center(
         child: Container (
-            child: FirebaseAnimatedList(
-              query: userRef,
-              itemBuilder: (BuildContext context, DataSnapshot snapshot,
-                  Animation<double> animation, int index) {
-                  return new ListTile(
-                    leading: Icon(Icons.message),
-                    title: Text(listsTodoList[index].title),
-                    subtitle: Text(listsTodoList[index].decsription),
-                );
-              },
-            ),
+          child: FirebaseAnimatedList(
+            query: userRef,
+            itemBuilder: (BuildContext context, DataSnapshot snapshot, Animation<double> animation, int index) {
+              return ListTile(
+                leading: Icon(Icons.alarm),
+                title: Text(listsTodoList[index].title),
+                subtitle: Text(listsTodoList[index].decsription),
+                // isThreeLine: true,
+                // dense: true,
+                trailing: Text(listsTodoList[index].alarm, style: TextStyle(
+                  color: Colors.green
+                  ),
+                ),
+                onTap: () {
+                  print(Text(listsTodoList[index].title));
+                },
+              );
+            },
           ),
-      ),
-        floatingActionButton: FloatingActionButton(
-          child: Icon(Icons.add),
-          onPressed: () {
-            print("Worked");
-          },
         ),
+      ),
     );
   }
 }
+
+// TODO: This can be fixed and returned as the we listview
+// return ListView(
+//   children: ListTile.divideTiles(
+//     context: context,
+//     tiles: [
+//       ListTile(
+//         leading: Icon(Icons.alarm),
+//         title: Text(listsTodoList[index].title),
+//         subtitle: Text(listsTodoList[index].decsription),
+//         dense: true,
+//         trailing: Text(listsTodoList[index].alarm, style: TextStyle(
+//           color: Colors.green
+//           ),
+//         ),
+//         onTap: () {
+          
+//         },
+//       ),
+//     ]
+//   ).toList(),
+// );

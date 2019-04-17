@@ -52,15 +52,16 @@ class _TomorrowScreenState extends State<TomorrowScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Center(
+      body: Container(
+        padding: EdgeInsets.all(10),
         child: Form(
           key: formKey,
           child: Column(
           children: <Widget>[
             TextField(
               decoration: InputDecoration(
-                  prefixIcon: Icon(Icons.title),
-                  border: OutlineInputBorder(),
+                  icon: Icon(Icons.title),
+                  //border: OutlineInputBorder(),
                   labelText: "title"),
               autocorrect: false,
               textInputAction: TextInputAction.next,
@@ -72,8 +73,8 @@ class _TomorrowScreenState extends State<TomorrowScreen> {
             // This is the decription
             TextField(
               decoration: InputDecoration(
-                  prefixIcon: Icon(Icons.description),
-                  border: OutlineInputBorder(),
+                  icon: Icon(Icons.description),
+                  //border: OutlineInputBorder(),
                   labelText: "description"),
               autocorrect: false,
               textInputAction: TextInputAction.next,
@@ -85,8 +86,8 @@ class _TomorrowScreenState extends State<TomorrowScreen> {
             // This is the location textfield
             TextField(
               decoration: InputDecoration(
-                  prefixIcon: Icon(Icons.location_on),
-                  border: OutlineInputBorder(),
+                  icon: Icon(Icons.location_on),
+                  //border: OutlineInputBorder(),
                   labelText: "location"),
               autocorrect: false,
               textInputAction: TextInputAction.next,
@@ -97,8 +98,8 @@ class _TomorrowScreenState extends State<TomorrowScreen> {
             ),
             TextField(
               decoration: InputDecoration(
-                  prefixIcon: Icon(Icons.alarm),
-                  border: OutlineInputBorder(),
+                  icon: Icon(Icons.alarm),
+                  //border: OutlineInputBorder(),
                   labelText: "alarm"),
               autocorrect: false,
               textInputAction: TextInputAction.next,
@@ -116,7 +117,7 @@ class _TomorrowScreenState extends State<TomorrowScreen> {
           ],
         ),
         ),
-      ),
+      )
     );
   }
 }
