@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:firebase_database/firebase_database.dart';
+import 'package:firebase_database/ui/firebase_animated_list.dart';
+import 'package:intl/intl.dart';
+import 'package:signin/data/todolist.dart';
 
 class TomorrowScreen extends StatefulWidget {
   @override
@@ -16,9 +19,11 @@ class _TomorrowScreenState extends State<TomorrowScreen> {
   @override
   void initState() {
     super.initState();
-    todoList = TodoList("", "", "", "");
+
+    todoList = TodoList("", "", "", "", "");
     final FirebaseDatabase database = FirebaseDatabase.instance;
-    userRef = database.reference().child('user');
+    
+    userRef = database.reference().child('user').child('tomorrow');
     userRef.onChildAdded.listen(_onEntryAdded);
     userRef.onChildChanged.listen(_onEntryChanged);
   }
@@ -40,110 +45,69 @@ class _TomorrowScreenState extends State<TomorrowScreen> {
   }
 
   void handleSubmit() {
-    final FormState form = formKey.currentState;
+    // final FormState form = formKey.currentState;
+    
+    userRef.push().set(todoList.toJson());
 
-    if (form.validate()) {
-      form.save();
-      form.reset();
-      userRef.push().set(todoList.toJson());
-    }
+    // if (form.validate()) {
+    //   form.save();
+    //   form.reset();
+    // }
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Container(
-        padding: EdgeInsets.all(10),
-        child: Form(
-          key: formKey,
-          child: Column(
-          children: <Widget>[
-            TextField(
-              decoration: InputDecoration(
-                  icon: Icon(Icons.title),
-                  //border: OutlineInputBorder(),
-                  labelText: "title"),
-              autocorrect: false,
-              textInputAction: TextInputAction.next,
-              keyboardType: TextInputType.text,
-              onChanged: (value) {
-                todoList.title = value;
-              },
-            ),
-            // This is the decription
-            TextField(
-              decoration: InputDecoration(
-                  icon: Icon(Icons.description),
-                  //border: OutlineInputBorder(),
-                  labelText: "description"),
-              autocorrect: false,
-              textInputAction: TextInputAction.next,
-              keyboardType: TextInputType.text,
-              onChanged: (value) {
-                todoList.decsription = value;
-              },
-            ),
-            // This is the location textfield
-            TextField(
-              decoration: InputDecoration(
-                  icon: Icon(Icons.location_on),
-                  //border: OutlineInputBorder(),
-                  labelText: "location"),
-              autocorrect: false,
-              textInputAction: TextInputAction.next,
-              keyboardType: TextInputType.text,
-              onChanged: (value) {
-                todoList.location = value;
-              },
-            ),
-            TextField(
-              decoration: InputDecoration(
-                  icon: Icon(Icons.alarm),
-                  //border: OutlineInputBorder(),
-                  labelText: "alarm"),
-              autocorrect: false,
-              textInputAction: TextInputAction.next,
-              keyboardType: TextInputType.text,
-              onChanged: (value) {
-                todoList.alarm = value;
-              },
-            ),
-            RaisedButton(
-              child: Text("Push to Database"),
-              onPressed: () {
-                handleSubmit();
-              },
-            )
-          ],
+      body: Center(
+        child: Container (
+          child: FirebaseAnimatedList(
+            query: userRef,
+            itemBuilder: (BuildContext context, DataSnapshot snapshot, Animation<double> animation, int index) {
+              return ListTile(
+                leading: Icon(Icons.alarm),
+                title: Text(listsTodoList[index].title),
+                subtitle: Text(listsTodoList[index].decsription),
+                // isThreeLine: true,
+                // dense: true,
+                trailing: Text(listsTodoList[index].alarm, style: TextStyle(
+                  color: Colors.green
+                  ),
+                ),
+                onTap: () {
+                  print(Text(listsTodoList[index].title));
+                },
+              );
+            },
+          ),
         ),
-        ),
-      )
+      ),
+
+      floatingActionButton: FloatingActionButton(
+        child: Icon(Icons.add),
+        onPressed: () {
+          print(new DateFormat.yMd().format(new DateTime.now()));
+
+          todoList.title = "value";
+          todoList.decsription = "value";
+          todoList.location = "value";
+          todoList.alarm = "value"; 
+          todoList.currentDate = DateTime.now().toLocal().toString();
+
+          handleSubmit();
+        },
+      ),
     );
   }
-}
+  // https://medium.com/@studymongolian/a-complete-guide-to-flutters-listtile-597a20a3d449
 
-class TodoList {
-  String key;
-  String title;
-  String decsription;
-  String location;
-  String alarm;
+  void fromTodayToMorrow(){
+    // Get the current date on phone
+    // Get the current a 
+    // First get date date of the todo list with now() method
+    var now = DateTime.now().toLocal();
+    var tomorrow = DateTime.now().toLocal().add(Duration(days: 1)).toLocal();
 
-  TodoList(this.title, this.decsription, this.location, this.alarm);
-
-  TodoList.fromSnapshot(DataSnapshot snapshot)
-      : key = snapshot.key,
-        title = snapshot.value["title"],
-        decsription = snapshot.value["decsription"],
-        location = snapshot.value["location"],
-        alarm = snapshot.value["alarm"];
-
-  toJson() {
-    return {
-      "title": title,
-      "decsription": decsription,
-      "location": location,
-      "alarm": alarm,
-    };
+    print("Today is ${now.toLocal()}");
+    print("Tomorrow is ${tomorrow.toLocal()}");
   }
 }

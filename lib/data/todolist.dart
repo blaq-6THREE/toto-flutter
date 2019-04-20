@@ -6,15 +6,17 @@ class TodoList {
   String decsription;
   String location;
   String alarm;
+  String currentDate;
 
-  TodoList(this.title, this.decsription, this.location, this.alarm);
+  TodoList(this.title, this.decsription, this.location, this.alarm, this.currentDate);
 
   TodoList.fromSnapshot(DataSnapshot snapshot)
       : key = snapshot.key,
         title = snapshot.value["title"],
         decsription = snapshot.value["decsription"],
         location = snapshot.value["location"],
-        alarm = snapshot.value["alarm"];
+        alarm = snapshot.value["alarm"],
+        currentDate = snapshot.value["currentDate"];
 
   toJson() {
     return {
@@ -22,6 +24,7 @@ class TodoList {
       "decsription": decsription,
       "location": location,
       "alarm": alarm,
+      "currentDate": currentDate,
     };
   }
 }
