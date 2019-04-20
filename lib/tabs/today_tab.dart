@@ -1,11 +1,14 @@
 import 'package:flutter/material.dart';
-import 'package:firebase_database/ui/firebase_animated_list.dart';
+
+// TODO: DO not forget to add APIKEY
+
 import 'package:intl/intl.dart';
 import 'package:signin/data/todolist.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:firebase_database/firebase_database.dart';
+import 'package:firebase_database/ui/firebase_animated_list.dart';
 import 'package:flutter_google_places/flutter_google_places.dart';
 import 'package:datetime_picker_formfield/datetime_picker_formfield.dart';
-import 'package:fluttertoast/fluttertoast.dart';
 
 class TodayScreen extends StatefulWidget {
   @override
@@ -19,10 +22,7 @@ class _TodayScreenState extends State<TodayScreen> {
     InputType.date: DateFormat('yyyy-MM-dd'),
   };
 
-  // Changeable in demo
-  InputType inputType = InputType.both;
-  bool editable = true;
-  DateTime date;
+  String apiKey = "AIzaSyBrii-n_FsOb96YDr-xb2ZLqiPUIhKv0Fc";
 
   TextEditingController titleController = TextEditingController();
   TextEditingController descriptionController = TextEditingController();
@@ -162,7 +162,7 @@ class _TodayScreenState extends State<TodayScreen> {
                 Column(
                   children: <Widget>[
                     PlacesAutocompleteField(
-                      apiKey: "AIzaSyBrii-n_FsOb96YDr-xb2ZLqiPUIhKv0Fc",
+                      apiKey: apiKey,
                       inputDecoration: InputDecoration(icon: Icon(Icons.location_on)),
                       controller: locationController,
                     ),
@@ -203,6 +203,7 @@ class _TodayScreenState extends State<TodayScreen> {
                     list.add(DateTime.now().toLocal().toString());
 
                     Navigator.of(context).pop(list);
+                    // https://tphangout.com/flutter-lists-and-dialogs/
                   },
                 )
               ],
