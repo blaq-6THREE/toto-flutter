@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:signin/home_tabbed.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:signin/pages/home.dart';
 
 class LoginPage extends StatefulWidget {
   
@@ -72,10 +72,9 @@ class _LoginPageState extends State<LoginPage> {
     if (formState.validate()) {
         formState.save();
         try {
-          FirebaseUser user = await FirebaseAuth.instance.signInWithEmailAndPassword(email: _email, password: _password);
-          Navigator.push(context, MaterialPageRoute(builder: (context) =>
-              Home(user: user)));
-
+          await FirebaseAuth.instance.signInWithEmailAndPassword(email: _email, password: _password).then((value){
+            Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => HomeTabbed()));
+          });
           widget.onSignedIn();
         }
         catch (e) {

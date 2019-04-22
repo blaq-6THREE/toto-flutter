@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 // TODO: DO not forget to add APIKEY
 
 import 'package:intl/intl.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:signin/data/todolist.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:firebase_database/firebase_database.dart';
@@ -37,6 +38,7 @@ class _TodayScreenState extends State<TodayScreen> {
 
   // Will be going to tomorrow view
   DatabaseReference ref;
+  String uid;
 
   final GlobalKey<FormState> formKey = GlobalKey<FormState>();
 
@@ -46,12 +48,19 @@ class _TodayScreenState extends State<TodayScreen> {
 
     todoList = TodoList("", "", "", "", "");
     final FirebaseDatabase database = FirebaseDatabase.instance;
-    
-    userRef = database.reference().child('user').child('today');
-    userRef.onChildAdded.listen(_onEntryAdded);
-    userRef.onChildChanged.listen(_onEntryChanged);
+
+    currentUser().then((userID){
+      uid = userID;
+      
+      userRef = database.reference().child('user').child(uid).child('today');
+
+    }).then((_) {
+      userRef.onChildAdded.listen(_onEntryAdded);
+      userRef.onChildChanged.listen(_onEntryChanged);
+    });
   }
 
+  // This adds the todoList to the dataBase
   _onEntryAdded(Event event) {
     setState(() {
       listsTodoList.add(TodoList.fromSnapshot(event.snapshot));
@@ -63,8 +72,7 @@ class _TodayScreenState extends State<TodayScreen> {
       return entry.key == event.snapshot.key;
     });
     setState(() {
-      listsTodoList[listsTodoList.indexOf(old)] =
-          TodoList.fromSnapshot(event.snapshot);
+      listsTodoList[listsTodoList.indexOf(old)] = TodoList.fromSnapshot(event.snapshot);
     });
   }
 
@@ -86,8 +94,13 @@ class _TodayScreenState extends State<TodayScreen> {
                   color: Colors.green
                   ),
                 ),
-                onTap: () {
+                onLongPress: () {
+                  // The Todo Item will be editted when long pressed
                   print(Text(listsTodoList[index].title));
+                  print(Text(listsTodoList[index].decsription));
+                  print(Text(listsTodoList[index].location));
+                  print(Text(listsTodoList[index].alarm));
+                  print(Text(listsTodoList[index].currentDate));
                 },
               );
             },
@@ -97,6 +110,7 @@ class _TodayScreenState extends State<TodayScreen> {
       floatingActionButton: FloatingActionButton(
         child: Icon(Icons.add),
         onPressed: () {
+          print("${uid}");
           _showDialog(context).then((value) {
 
             todoList.title = value[0];
@@ -105,17 +119,17 @@ class _TodayScreenState extends State<TodayScreen> {
             todoList.alarm = value[3];
             todoList.currentDate = value[4];
 
-            userRef.push().set(todoList.toJson());
-
-            Fluttertoast.showToast(
-              msg: "List added to today",
-              toastLength: Toast.LENGTH_SHORT,
-              gravity: ToastGravity.BOTTOM,
-              timeInSecForIos: 1,
-              backgroundColor: Colors.red,
-              textColor: Colors.white,
-              fontSize: 16.0
-            );
+            userRef.push().set(todoList.toJson()).then((value) {
+              Fluttertoast.showToast(
+                msg: "List added to today",
+                toastLength: Toast.LENGTH_SHORT,
+                gravity: ToastGravity.BOTTOM,
+                timeInSecForIos: 1,
+                backgroundColor: Colors.red,
+                textColor: Colors.white,
+                fontSize: 16.0
+              );
+            });
           });
         },
       ),      
@@ -133,9 +147,9 @@ class _TodayScreenState extends State<TodayScreen> {
           content: SingleChildScrollView(
             child: ListBody(
               children: <Widget>[
-                
+
                 // Title and Descrition
-                Column(
+                Column (
                   children: <Widget>[
                     TextField(
                       decoration: InputDecoration(
@@ -212,5 +226,10 @@ class _TodayScreenState extends State<TodayScreen> {
         );
       },
     );
+  }
+
+  Future<String> currentUser() async{
+    FirebaseUser user = await FirebaseAuth.instance.currentUser();
+    return user.uid;
   }
 }

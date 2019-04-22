@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:signin/pages/home.dart';
+import 'package:signin/home_tabbed.dart';
 
 class SignUp extends StatefulWidget {
   @override
@@ -80,10 +80,8 @@ class _SignUpState extends State<SignUp> {
     if (_formKey.currentState.validate()) {
       _formKey.currentState.save();
       try {
-        FirebaseUser user = await FirebaseAuth.instance
-            .createUserWithEmailAndPassword(email: _email, password: _password);
-        Navigator.pushReplacement(
-            context, MaterialPageRoute(builder: (_) => Home(user: user)));
+        FirebaseUser user = await FirebaseAuth.instance.createUserWithEmailAndPassword(email: _email, password: _password);
+        Navigator.pushReplacement(context, MaterialPageRoute(builder: (_) => HomeTabbed()));
       } catch (e) {}
     }
   }

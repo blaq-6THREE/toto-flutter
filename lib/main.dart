@@ -10,7 +10,7 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       title: 'Flutter Demo',
 
-      home: Home(),
+      home: HomePage(),   // This is the default home
     );
   }
 }

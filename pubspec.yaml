@@ -42,6 +42,9 @@ dependencies:
   # This is for the Date & Time picker
   datetime_picker_formfield: ^0.1.8
 
+  # Notification
+  # notifications: ^0.0.3
+
 dev_dependencies:
   flutter_test:
     sdk: flutter

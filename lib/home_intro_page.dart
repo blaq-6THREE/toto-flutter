@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:signin/pages/Setup/SignUp.dart';
-import 'package:signin/pages/Setup/signin.dart';
+import 'package:signin/pages/setup/signup.dart';
+import 'package:signin/pages/Setup/login.dart';
 
-class ProfileIntro extends StatelessWidget {
+class HomeIntro extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
 
@@ -21,10 +21,7 @@ class ProfileIntro extends StatelessWidget {
               child: Text("Sign In"),
               color: Colors.green,
               onPressed: () {
-                Navigator.push(
-                    context,
-                    new MaterialPageRoute(
-                        builder: (context) => new LoginPage()));
+                Navigator.push(context, new MaterialPageRoute(builder: (context) => new LoginPage()));
                 return null;
               },
             ),
@@ -32,12 +29,12 @@ class ProfileIntro extends StatelessWidget {
               height: 1.0,
               color: Colors.red[800],
             ),
+
             RaisedButton(
               child: Text("Register"),
               color: Colors.blue,
               onPressed: () {
-                Navigator.push(context,
-                    new MaterialPageRoute(builder: (context) => new SignUp()));
+                Navigator.push(context,new MaterialPageRoute(builder: (context) => new SignUp()));
               },
             )
           ],

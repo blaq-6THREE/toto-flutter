@@ -35,6 +35,3 @@ class TabbedWidget extends StatelessWidget {
     );
   }
 }
-
-class FirstScreen {
-}

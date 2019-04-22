@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-import 'profile_intro_page.dart';
+import 'home_intro_page.dart';
 
 class ProfilePage extends StatefulWidget {
 
@@ -20,6 +20,7 @@ class _ProfilePageState extends State<ProfilePage> {
 
   AuthStatus status = AuthStatus.notSignIn;
   String uid;
+  String email;
 
   @override
   void initState() {
@@ -48,25 +49,36 @@ class _ProfilePageState extends State<ProfilePage> {
 
   @override
   Widget build(BuildContext context) {
-    switch (status) {
-      case AuthStatus.notSignIn:
-        // Take em to a page with two buttons
-        // return LoginPage(onSignedIn: signedIn);
-        return ProfileIntro();
-        break;
-      case AuthStatus.signedIn:
-        // Take em to a full profile page
-        return Scaffold(
-          appBar: AppBar(
-            title: Text(uid),
-          ),
-        );
-        break;
-    }
+    return MaterialApp(
+      home: Scaffold(
+        appBar: AppBar(
+          title: Text("Profile"),
+          actions: <Widget>[
+            FlatButton(
+              child: Text("Sign out"),
+              onPressed: () {
+                // print("${uid}");
+                signOut();
+              },
+            )
+          ],
+        ),
+      )
+    );
   }
 
-  Future<String> currentUser() async{
-    FirebaseUser user = await FirebaseAuth.instance.currentUser();
-    return user.uid;
+  Future<void> signOut() async {
+    try {
+      FirebaseAuth.instance.signOut();
+      Navigator.pushReplacement(context, MaterialPageRoute(builder: (_) => HomeIntro()));
+    }
+    catch (e) {
+      print(e.message);
+    }
   }
+}
+
+Future<String> currentUser() async{
+  FirebaseUser user = await FirebaseAuth.instance.currentUser();
+  return user.uid;
 }
